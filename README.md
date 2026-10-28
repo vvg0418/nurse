@@ -1,4 +1,4 @@
-# alishka
+# alina
 
 Сайт-визитка. Статический: `index.html` и фото в `img/`.
 
