@@ -3,309 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>alina</title>
 <meta name="description" content="Алина — медсестра, рядом с которой становится спокойнее">
+<meta property="og:type" content="website">
 <meta property="og:title" content="alina">
+<meta property="og:description" content="Медсестра, рядом с которой становится спокойнее">
+<meta property="og:image" content="https://alishka-eight.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#120d10">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23120d10'/%3E%3Cpath fill='%23ff3d8b' d='M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z'/%3E%3C/svg%3E">
-<style>[hidden]{display:none!important}</style>
-<title>alina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Manrope:wght@400;500;700&display=swap">
-<style>
-/* Layout: длинный сценарий прокрутки. Чёрные секции (hero, титулы, фигуры, бегущий текст, слова) →
-   светлые секции (о ней, фото, круг, тоннель кадров) → чёрный финал (смены, отзывы, подвал). */
-:root {
-  --black: #120d10;
-  --light: #e8dde3;
-  --pink: #ff3d8b;
-  --pink-deep: #dc1469;
-  --grey: #8a7a83;
-  --accent: var(--pink);
-  --f-display: "Oswald", "Arial Narrow", Impact, sans-serif;
-  --f-body: "Manrope", Arial, sans-serif;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-html { font-size: calc(100vw / 1920); }
-@media (max-width: 1100px) { html { font-size: calc(100vw / 1100); } }
-body {
-  margin: 0; font-family: var(--f-body); color: var(--light); background-color: var(--light);
-  overflow-x: hidden; position: relative; line-height: 1.2;
-}
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-::-webkit-scrollbar { width: 0; }
-img { max-width: 100%; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
-
-.container {
-  padding-left: max(60rem, 16px, env(safe-area-inset-left, 0px));
-  padding-right: max(60rem, 16px, env(safe-area-inset-right, 0px));
-  margin: 0 auto; height: 100%;
-}
-section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
-.sec_zi { z-index: 11; }
-.sec_white { background-color: var(--light); --accent: var(--pink-deep); color: var(--black); }
-.sec_black { background-color: var(--black); }
-.ekran { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; color: var(--accent); }
-.sub_title { font-size: 130rem; line-height: 95%; }
-.p_text { font-size: 23rem; letter-spacing: -.02em; line-height: 115%; }
-.inner_grid { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 20rem; }
-
-/* заглушки под фото: заменяются на <img> */
-.ph { position: relative; overflow: hidden; background: linear-gradient(150deg, #ff3d8b 0%, #8a1f52 55%, #1b0e16 100%); display: grid; place-items: center; }
-.ph svg { width: 22%; min-width: 24px; fill: rgba(255,255,255,.22); }
-.ph.v2 { background: linear-gradient(210deg, #ff7ab0 0%, #b3225f 50%, #2a111d 100%); }
-.ph.v3 { background: linear-gradient(120deg, #2a111d 0%, #c8266f 60%, #ff5fa2 100%); }
-.ph.v4 { background: linear-gradient(170deg, #ffb3d1 0%, #ff3d8b 45%, #5c1236 100%); }
-.ph img, .big_vid__anim_img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; display: block; max-width: none; }
-
-/* фон: эмблема, дым, зерно */
-.head { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 720rem; width: 720rem; z-index: 10; pointer-events: none; display: grid; place-items: center; }
-.head svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 26s linear infinite; }
-.head svg.core { width: 38%; fill: var(--pink); animation: beat 1.7s ease-in-out infinite; filter: drop-shadow(0 0 40rem rgba(255, 61, 139, .7)); }
-.head::before, .head::after { content: ""; position: absolute; inset: 14%; border-radius: 50%; border: 2px solid rgba(255, 61, 139, .5); animation: wave 3.4s ease-out infinite; }
-.head::after { animation-delay: 1.7s; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes beat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.14); } 28% { transform: scale(1); } 42% { transform: scale(1.08); } }
-@keyframes wave { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
-.smoke { position: fixed; inset: 0; z-index: 999; mix-blend-mode: lighten; pointer-events: none; isolation: isolate; opacity: .5; overflow: hidden; }
-.smoke i { position: absolute; border-radius: 50%; filter: blur(110rem); background: radial-gradient(circle, rgba(255, 61, 139, .55), transparent 70%); animation: drift 22s ease-in-out infinite alternate; }
-.smoke i:nth-child(1) { width: 900rem; height: 900rem; left: -200rem; top: 10%; }
-.smoke i:nth-child(2) { width: 700rem; height: 700rem; right: -150rem; top: 45%; animation-duration: 28s; animation-direction: alternate-reverse; }
-.smoke i:nth-child(3) { width: 800rem; height: 800rem; left: 35%; top: -300rem; animation-duration: 33s; }
-@keyframes drift { to { transform: translate(260rem, 220rem) scale(1.25); } }
-.grain { position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .06; mix-blend-mode: screen;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-
-/* прелоадер */
-.preloader {
-  position: fixed; inset: 0; z-index: 99999; background: var(--black);
-  padding-left: max(60rem, 16px, env(safe-area-inset-left, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);
-  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
-  animation: pfail .6s ease 9s forwards;
-}
-@keyframes pfail { to { opacity: 0; visibility: hidden; } }
-.preloader__title { color: var(--grey); }
-.preloader__percent { font-size: 300rem; line-height: 1; font-variant-numeric: tabular-nums; }
-
-/* hero */
-.hero { height: 100vh; padding-bottom: 0; }
-.hero__content { height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 60rem 0; position: relative; z-index: 12; }
-.hero__main_text { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 680rem; line-height: .95; white-space: nowrap; }
-.hero__content_bottom_text { grid-column: 1 / 2; margin: 0; }
-.hero__content_bottom_scroll { grid-column: 4 / 5; text-align: end; align-self: end; color: var(--grey); margin: 0; }
-
-/* титулы */
-.options { padding-bottom: 100rem; }
-.options__item_wrap { min-height: 110vh; align-items: end; position: relative; z-index: 12; padding-bottom: 6vh; }
-.options__item { display: flex; flex-direction: column; gap: 14rem; }
-.options__item.left { grid-column: 1 / 3; }
-.options__item.right { grid-column: 3 / 5; justify-self: end; text-align: right; align-items: flex-end; }
-.options__item_desc { max-width: 520rem; }
-.options__item_solid { padding: 22rem; background: var(--pink); color: var(--black); grid-column: 3 / 4; gap: 70rem; position: relative; z-index: 12; }
-.options__item_circle { height: 14rem; width: 14rem; background: var(--black); border-radius: 50%; }
-
-/* вращающиеся фигуры */
-.negative { height: 350vh; position: relative; }
-.negative__content { height: 800rem; width: 800rem; position: sticky; top: calc(50vh - 400rem); margin: 0 auto; z-index: 12; }
-.negative__rotate { position: relative; height: 100%; animation: spin 13s linear infinite; transform-origin: 50% 50%; }
-.negative__item { position: absolute; inset: 0; }
-.negative__item svg { width: 100%; height: 100%; }
-
-/* «Я — …» */
-.iamgleb { height: 600vh; position: relative; }
-.iamgleb__content { position: sticky; top: 0; height: 100vh; width: 2500rem; display: flex; align-items: center; z-index: 12; }
-.iamgleb__line { font-size: 500rem; letter-spacing: -.02em; line-height: 1; white-space: nowrap; }
-.iamgleb__gif { position: absolute; fill: var(--pink); }
-.iamgleb__gif:nth-child(2) { top: 18%; left: 1300rem; width: 260rem; }
-.iamgleb__gif:nth-child(3) { top: 62%; left: 2050rem; width: 170rem; fill: transparent; stroke: var(--pink); stroke-width: 1.4; }
-
-/* слова */
-.orpk { padding: 300rem 0 500rem; }
-.orpk__content { display: flex; flex-direction: column; gap: 50rem; position: relative; z-index: 12; }
-.orpk__item { overflow: hidden; }
-.orpk__item_text { font-size: 290rem; text-align: center; margin: 0; line-height: 1.02; }
-
-/* о ней */
-.about { color: var(--black); }
-.about__content { padding-top: 110rem; display: flex; gap: 20rem; }
-.about__offer { width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; gap: 40rem; }
-.about__title { height: 100%; position: relative; }
-.about__title_text { position: sticky; top: 10rem; }
-.about__text { width: 590rem; max-width: 100%; }
-.about__img { height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; }
-.about__img .ph { height: 100%; width: 78%; }
-.about__img .ph img { object-position: 50% 20%; }
-
-.zoj { height: 420vh; padding-top: 100rem; color: var(--black); }
-.zoj .inner_grid { height: 100vh; align-items: center; position: sticky; top: 0; z-index: 13; }
-.zoj__offer { grid-column: 2 / 4; display: flex; flex-direction: column; align-items: center; gap: 20rem; }
-.zoj__title_line { text-align: center; }
-.zoj__desc { width: 470rem; max-width: 100%; text-align: center; }
-.zoj__photo_list { height: 100vh; margin-top: 800rem; position: relative; z-index: 14; }
-.zoj__photo_item { width: 500rem; height: 600rem; padding: 40rem; background: #fff; box-shadow: 10rem 10rem 18rem rgba(34, 60, 80, .2); position: absolute; }
-.zoj__photo_item .ph { width: 100%; height: 100%; }
-.zoj__photo_list .zoj__photo_item:nth-child(1) { top: 50%; left: 55%; transform: rotate(10deg) translate(-50%, -50%); z-index: 14; }
-.zoj__photo_list .zoj__photo_item:nth-child(2) { top: 110%; left: 45%; transform: rotate(-6deg) translate(-50%, -50%); z-index: 15; }
-
-/* круг */
-.gang { color: var(--black); padding-bottom: 600rem; }
-.gang__141 { position: relative; font-size: 520rem; line-height: 1; }
-.gang__blood { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 0; height: 360rem; overflow: hidden; background: var(--black); clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 88%); }
-.gang__text { margin: 80rem 0 300rem; }
-.gang__list_wrap { position: relative; display: flex; align-items: flex-start; }
-.gang__list { width: 100%; display: flex; flex-direction: column; gap: 60rem; }
-.gang__list_title { color: #6b5b64; position: sticky; top: 48vh; width: 100%; }
-.gang__list_item { display: flex; gap: 14rem; align-items: flex-start; }
-.gang__list_item_name { margin-top: 10rem; }
-
-/* большое окно */
-.big_vid { height: 320vh; }
-.big_vid__wrap { position: sticky; top: 0; height: 100vh; width: 100vw; display: grid; justify-content: center; align-items: center; }
-.big_vid__text { position: absolute; top: 50%; transform: translateY(-50%); color: var(--black); width: 100%; z-index: 998; }
-.big_vid__anim { background: var(--black); height: 100vh; width: 100vw; position: relative; z-index: 999; overflow: hidden; }
-.big_vid__anim_img { position: absolute; inset: 0; opacity: 0; display: grid; place-items: center; }
-.big_vid__anim_img:first-child { opacity: 1; }
-.big_vid__anim_img span { font-family: var(--f-display); font-weight: 700; font-size: 380rem; color: rgba(18, 13, 16, .35); letter-spacing: -.02em; }
-.big_vid__text .container { display: flex; justify-content: space-between; align-items: center; gap: 20rem; }
-
-/* тоннель кадров */
-.time { color: var(--black); height: 1200vh; }
-.time__content { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; perspective: 2000px; }
-.time__list { position: absolute; inset: 0; transform-style: preserve-3d; z-index: 999; }
-.time__item { position: absolute; width: 850rem; height: 650rem; top: 50%; left: 50%; transform: translate(-50%, -50%); will-change: transform, opacity, filter; }
-.time__item .ph { width: 100%; height: 100%; }
-.time__title { text-align: center; padding-top: 20rem; font-size: 300rem; line-height: 85%; }
-
-.slay { padding-top: 500rem; }
-.slay__content { position: relative; }
-.slay__text { font-size: 170rem; line-height: 92%; text-align: center; position: relative; z-index: 999; }
-.slay__prize { position: absolute; fill: var(--pink-deep); }
-.slay__prize:nth-child(2) { transform: rotate(35deg); width: 760rem; top: -150rem; right: -70rem; z-index: 1000; }
-.slay__prize:nth-child(3) { transform: rotate(-29deg); width: 420rem; top: -290rem; left: 150rem; z-index: 998; filter: blur(4rem); }
-.slay__prize:nth-child(4) { transform: rotate(65deg); width: 220rem; top: -250rem; right: 700rem; filter: blur(8rem); }
-
-/* смены */
-.victims { padding-top: 80vh; height: 750vh; }
-.victims__title { text-align: center; position: sticky; top: 30vh; }
-.victims__title_big { font-size: 400rem; line-height: 1; }
-.victims__list { padding-top: 400rem; display: flex; flex-direction: column; gap: 500rem; width: 100%; }
-.victims__item { width: 600rem; height: 600rem; position: relative; padding: 20rem; }
-.victims__item_photo { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 999; }
-.victims__item_x { position: absolute; top: 36rem; right: 36rem; width: 120rem; padding: 20rem; border-radius: 50%; background: rgba(18, 13, 16, .72); fill: var(--pink); z-index: 1000; }
-.victims__item_status { position: relative; z-index: 1001; display: flex; flex-direction: column; gap: 6rem; align-items: center; justify-content: flex-end; height: 100%; }
-.victims__item_status_title { color: var(--light); font-size: 18rem; }
-.victims__item_status_block { color: var(--black); background: var(--pink); padding: 4rem 14rem; border-radius: 100rem; display: inline-block; }
-.victims__list .victims__item:nth-child(2) { align-self: flex-end; }
-.victims__list .victims__item:nth-child(3) { margin-left: 145rem; }
-.victims__list .victims__item:nth-child(4) { align-self: center; }
-
-.kursk { height: 200vh; }
-.kursk__content { display: flex; flex-direction: column; gap: 200rem; align-items: center; justify-content: center; }
-.kursk__img_wrap_wrap { width: 450rem; height: 592rem; display: flex; align-items: center; justify-content: center; position: relative; z-index: 9998; }
-.kursk__img_wrap { width: 130rem; height: 130rem; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.kursk__img_wrap .ph { width: 450rem; height: 592rem; flex: none; }
-.kursk__text { font-size: 180rem; line-height: 92%; position: relative; z-index: 9999; }
-
-.menace { height: 170vh; display: flex; align-items: center; justify-content: center; }
-.menace__word { font-size: 560rem; line-height: 1; }
-.menace .menace__word:nth-child(1) { transform: rotate(-6.5deg); margin-bottom: 60rem; margin-left: 150rem; }
-.menace .menace__word:nth-child(2) { transform: rotate(7.3deg); position: relative; z-index: 9999; }
-.menace__kus { position: absolute; width: 900rem; height: 600rem; top: 37%; left: 55%; transform: translate(-37%, -55%); z-index: 9998; }
-.menace__kus svg { position: absolute; fill: var(--pink); }
-.menace__kus svg:nth-child(2) { height: 560rem; top: 50%; left: 50%; transform: translate(-50%, -50%); fill: rgba(255, 61, 139, .18); }
-.menace__kus svg:nth-child(1) { height: 180rem; top: 40%; left: 13%; transform: translate(-50%, 0); }
-.menace__kus svg:nth-child(3) { height: 220rem; top: 52%; right: -6%; transform: translate(-50%, 0); }
-
-/* отзывы */
-.reviews { padding: 160rem 0 260rem; min-height: 100vh; }
-.reviews__title { font-size: 300rem; line-height: 1; margin: 0 0 80rem; }
-.rev-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80rem; align-items: start; }
-.form { display: grid; gap: 22rem; }
-.form label { display: grid; gap: 8rem; color: var(--grey); font-size: 22rem; }
-.form input, .form textarea { font: inherit; font-size: 26rem; color: var(--light); background: #1c1418; border: 1px solid #3a2a33; border-radius: 12px; padding: 18rem 22rem; width: 100%; transition: border-color .3s, box-shadow .3s; }
-.form textarea { min-height: 260rem; resize: vertical; }
-.form input::placeholder, .form textarea::placeholder { color: #75636d; }
-.form input:focus, .form textarea:focus { border-color: var(--pink); outline: none; box-shadow: 0 0 0 4px rgba(255, 61, 139, .2); }
-.btn { font-family: var(--f-body); font-weight: 700; font-size: 24rem; cursor: pointer; padding: 18rem 40rem; border-radius: 999px; border: 1.5px solid var(--pink); background: var(--pink); color: var(--black); transition: transform .3s, background .3s, color .3s; text-decoration: none; display: inline-block; }
-.btn:hover { background: var(--light); border-color: var(--light); transform: translateY(-3px); }
-.btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
-.note { color: var(--grey); font-size: 21rem; min-height: 1.4em; margin: 0; }
-.note.err { color: #ff9fc4; }
-.list { display: grid; }
-.rev { padding-block: 40rem; border-top: 1px solid #3a2a33; animation: pop .8s cubic-bezier(.2, .8, .2, 1) both; }
-.rev:first-child { border-top: 0; padding-top: 0; }
-@keyframes pop { from { transform: translateY(30px); } to { transform: none; } }
-.rev q { display: block; quotes: "«" "»"; font-size: 40rem; line-height: 1.3; letter-spacing: -.01em; overflow-wrap: anywhere; white-space: pre-wrap; }
-.rev .who { margin-top: 14rem; font-size: 21rem; color: var(--grey); display: flex; flex-wrap: wrap; gap: 6rem 24rem; align-items: center; }
-.rev .who strong { color: var(--light); }
-.del { background: none; border: 0; color: var(--grey); font: inherit; cursor: pointer; text-decoration: underline; padding: 0; }
-.del:hover { color: var(--pink); }
-.empty { color: var(--grey); border: 1px dashed #3a2a33; border-radius: 14px; padding: 36rem; margin: 0; font-size: 26rem; }
-.clist { display: flex; flex-wrap: wrap; gap: 16rem; margin-top: 60rem; }
-.copy-field { display: flex; align-items: center; gap: 16rem; background: #1c1418; border: 1px solid #3a2a33; border-radius: 14px; padding: 12rem 12rem 12rem 24rem; font-size: 24rem; max-width: 100%; }
-.copy-field span { user-select: all; overflow-wrap: anywhere; min-width: 0; }
-.copy-field .btn { padding: 10rem 24rem; font-size: 20rem; background: transparent; color: var(--pink); }
-.contacts[hidden] { display: none; }
-
-/* подвал */
-.footer { height: 100vh; padding-bottom: 0; overflow: hidden; }
-.footer .container { height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding-top: 40rem; padding-bottom: max(30rem, env(safe-area-inset-bottom, 0px)); }
-.footer__top { color: var(--grey); }
-.footer__center { height: 690rem; width: 100%; display: flex; justify-content: center; }
-.footer__img { height: 100%; fill: var(--pink); }
-.footer__bottom { display: flex; width: 100%; align-items: center; justify-content: space-between; color: var(--grey); }
-.footer__bottom > * { width: 100%; }
-.footer__bottom_text:nth-child(2) { text-align: center; }
-.footer__bottom_text:nth-child(3) { text-align: right; }
-.footer__marquee { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; overflow: hidden; z-index: 2; pointer-events: none; }
-.footer__marquee .track { display: flex; width: max-content; animation: mq 22s linear infinite; }
-.footer__marquee p { font-family: var(--f-display); font-weight: 700; font-size: 300rem; letter-spacing: -.02em; color: var(--pink); margin: 0; padding-right: 100rem; white-space: nowrap; line-height: 1.1; }
-@keyframes mq { to { transform: translateX(-50%); } }
-.to-reviews { position: fixed; z-index: 1001; right: max(24px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); font-size: 15px; padding: 10px 18px; }
-
-@media (max-width: 1100px) {
-  .hero__main_text { font-size: 300rem; }
-  .inner_grid { grid-template-columns: repeat(2, 1fr); }
-  .hero__content_bottom_scroll { grid-column: 2 / 3; }
-  .options__item.left, .options__item.right, .options__item_solid { grid-column: 1 / 3; }
-  .options__item.right { text-align: left; justify-self: start; align-items: flex-start; }
-  .sub_title { font-size: 110rem; }
-  .p_text { font-size: 30rem; }
-  .orpk__item_text { font-size: 160rem; }
-  .iamgleb__line { font-size: 380rem; }
-  .about__content { flex-direction: column; }
-  .about__offer, .about__img { height: auto; }
-  .about__img .ph { height: 700rem; width: 100%; }
-  .zoj__offer { grid-column: 1 / 3; }
-  .gang__141 { font-size: 300rem; }
-  .gang__text { margin: 60rem 0 200rem; }
-  .gang__list_title { position: static; margin-bottom: 20rem; }
-  .gang__list_wrap { flex-direction: column; }
-  .rev-grid { grid-template-columns: minmax(0, 1fr); }
-  .reviews__title { font-size: 200rem; }
-  .menace__word { font-size: 300rem; }
-  .time__item { width: 560rem; height: 440rem; }
-  .time__title { font-size: 190rem; }
-  .big_vid__anim_img span { font-size: 220rem; }
-  .big_vid__text .container { flex-direction: column; }
-  .victims__title_big { font-size: 240rem; }
-  .victims__item { width: 480rem; height: 480rem; }
-  .kursk__text { font-size: 120rem; }
-  .slay__text { font-size: 110rem; }
-  .footer__center { height: 420rem; }
-  .footer__marquee p { font-size: 200rem; }
-  .preloader__percent { font-size: 220rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .head svg.ring, .head svg.core, .head::before, .head::after, .negative__rotate, .smoke i, .footer__marquee .track, .rev { animation: none; }
-  .preloader { display: none; }
-}
-</style>
-
+<style>[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -321,13 +34,15 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
   <div class="preloader__percent ekran" id="percent">0%</div>
 </div>
 
-<header class="hero sec_black">
+<div class="bday-ribbon" data-text="bday_ribbon" data-label="Лента вверху в день рождения">1 ноября · с днём рождения</div>
+
+<header class="hero sec_black" id="top">
   <div class="container">
     <div class="hero__content">
-      <div class="hero__main_text ekran" aria-label="alina"><span>a</span><span>li</span><span>na</span></div>
+      <div class="hero__main_text ekran" id="heroName" aria-label="alina"><span>a</span><span>li</span><span>na</span></div>
       <div class="inner_grid">
-        <p class="hero__content_bottom_text p_text">Медсестра, рядом с которой становится спокойнее</p>
-        <p class="hero__content_bottom_scroll p_text">©2026</p>
+        <p class="hero__content_bottom_text p_text" id="heroSub" data-text="hero_sub" data-label="Первый экран: подпись">Медсестра, рядом с которой становится спокойнее</p>
+        <p class="hero__content_bottom_scroll p_text" id="heroMeta">©2026</p>
       </div>
     </div>
   </div>
@@ -337,32 +52,32 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
   <div class="container">
     <div class="options__item_wrap inner_grid">
       <div class="options__item left">
-        <div class="options__item_title sub_title ekran">Медсестра</div>
-        <div class="options__item_desc p_text">Работает в военном госпитале, где особенно важны внимание, точность и спокойная рука</div>
+        <div class="options__item_title sub_title ekran" data-text="t1_title" data-label="Титул 1">Медсестра</div>
+        <div class="options__item_desc p_text" data-text="t1_desc" data-label="Титул 1: описание">Работает в военном госпитале, где особенно важны внимание, точность и спокойная рука</div>
       </div>
     </div>
     <div class="options__item_wrap inner_grid">
       <div class="options__item right">
-        <div class="options__item_title sub_title ekran">Рядом</div>
-        <div class="options__item_desc p_text">Тот человек в смене, к которому хочется подойти, когда тревожно</div>
+        <div class="options__item_title sub_title ekran" data-text="t2_title" data-label="Титул 2">Рядом</div>
+        <div class="options__item_desc p_text" data-text="t2_desc" data-label="Титул 2: описание">Тот человек в смене, к которому хочется подойти, когда тревожно</div>
       </div>
     </div>
     <div class="options__item_wrap inner_grid">
       <div class="options__item left">
-        <div class="options__item_title sub_title ekran">Тепло</div>
-        <div class="options__item_desc p_text">Говорит мягко, объясняет понятно и не забывает улыбнуться даже после долгой смены</div>
+        <div class="options__item_title sub_title ekran" data-text="t3_title" data-label="Титул 3">Тепло</div>
+        <div class="options__item_desc p_text" data-text="t3_desc" data-label="Титул 3: описание">Говорит мягко, объясняет понятно и не забывает улыбнуться даже после долгой смены</div>
       </div>
     </div>
     <div class="options__item_wrap inner_grid">
       <div class="options__item right">
-        <div class="options__item_title sub_title ekran">Смена</div>
-        <div class="options__item_desc p_text">Дежурства, ранние подъёмы и ночи, после которых всё равно остаётся силы на добрые слова</div>
+        <div class="options__item_title sub_title ekran" data-text="t4_title" data-label="Титул 4">Смена</div>
+        <div class="options__item_desc p_text" data-text="t4_desc" data-label="Титул 4: описание">Дежурства, ранние подъёмы и ночи, после которых всё равно остаётся силы на добрые слова</div>
       </div>
     </div>
     <div class="options__item_wrap inner_grid">
       <div class="options__item options__item_solid">
         <div class="options__item_circle"></div>
-        <div class="options__item_desc p_text">Для неё забота не должность, а способ быть рядом с людьми, когда им это нужнее всего</div>
+        <div class="options__item_desc p_text" data-text="t5_desc" data-label="Розовая карточка">Для неё забота не должность, а способ быть рядом с людьми, когда им это нужнее всего</div>
       </div>
     </div>
   </div>
@@ -380,7 +95,7 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 
 <section class="iamgleb sec_black">
   <div class="iamgleb__content">
-    <div class="iamgleb__line ekran">Я — Алина, и я медсестра</div>
+    <div class="iamgleb__line ekran" data-text="iam_line" data-label="Бегущая строка «Я — …»">Я — Алина, и я медсестра</div>
     <svg class="iamgleb__gif" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
     <svg class="iamgleb__gif" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cross"/></svg>
   </div>
@@ -388,23 +103,23 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 
 <section class="orpk sec_black">
   <div class="orpk__content">
-    <div class="orpk__item"><p class="orpk__item_text ekran">внимательно</p></div>
-    <div class="orpk__item"><p class="orpk__item_text ekran">бережно</p></div>
-    <div class="orpk__item"><p class="orpk__item_text ekran">спокойно</p></div>
-    <div class="orpk__item"><p class="orpk__item_text ekran">ответственно</p></div>
+    <div class="orpk__item"><p class="orpk__item_text ekran" data-text="word1" data-label="Большое слово 1">внимательно</p></div>
+    <div class="orpk__item"><p class="orpk__item_text ekran" data-text="word2" data-label="Большое слово 2">бережно</p></div>
+    <div class="orpk__item"><p class="orpk__item_text ekran" data-text="word3" data-label="Большое слово 3">спокойно</p></div>
+    <div class="orpk__item"><p class="orpk__item_text ekran" data-text="word4" data-label="Большое слово 4">ответственно</p></div>
   </div>
 </section>
 
-<section class="about sec_white sec_zi">
+<section class="about sec_white sec_zi" id="about">
   <div class="container">
     <div class="about__content">
       <div class="about__offer">
         <div class="about__title sub_title ekran">
-          <div class="about__title_text">система спокойной заботы<br>в мире, где<br>всё спешит</div>
+          <div class="about__title_text" data-text="about_title" data-label="О ней: заголовок">система спокойной заботы<br>в мире, где<br>всё спешит</div>
         </div>
-        <div class="about__text p_text">Алиночка показывает заботу через мелочи: внимательно слушает, мягко объясняет, спокойно делает своё дело и всегда помнит, что за каждым пациентом стоит человек со своей историей</div>
+        <div class="about__text p_text" data-text="about_text" data-label="О ней: текст">Алиночка показывает заботу через мелочи: внимательно слушает, мягко объясняет, спокойно делает своё дело и всегда помнит, что за каждым пациентом стоит человек со своей историей</div>
       </div>
-      <div class="about__img"><div class="ph"><img src="img/p08.webp" alt="" decoding="async"></div></div>
+      <div class="about__img" data-zoom><div class="ph"><img src="img/p08.webp" alt="Алина" decoding="async"></div></div>
     </div>
   </div>
 </section>
@@ -414,37 +129,40 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
     <div class="inner_grid">
       <div class="zoj__offer">
         <div class="zoj__title sub_title ekran">
-          <div class="zoj__title_line">внимание к людям</div>
-          <div class="zoj__title_line">и к мелочам</div>
+          <div class="zoj__title_line" data-text="zoj_title1" data-label="Полароиды: заголовок, строка 1">внимание к людям</div>
+          <div class="zoj__title_line" data-text="zoj_title2" data-label="Полароиды: заголовок, строка 2">и к мелочам</div>
         </div>
-        <div class="zoj__desc p_text">В смене у Алинки много тёплых слов, спокойного голоса и ощущения, что рядом свой человек</div>
+        <div class="zoj__desc p_text" data-text="zoj_desc" data-label="Полароиды: текст">В смене у Алинки много тёплых слов, спокойного голоса и ощущения, что рядом свой человек</div>
       </div>
     </div>
     <div class="zoj__photo_list">
-      <div class="zoj__photo_item"><div class="ph"><img src="img/p05.webp" alt="" decoding="async"></div></div>
-      <div class="zoj__photo_item"><div class="ph"><img src="img/p04.webp" alt="" decoding="async"></div></div>
+      <div class="zoj__photo_item" data-zoom><div class="ph"><img src="img/p05.webp" alt="Алина на скамейке в парке" decoding="async"></div></div>
+      <div class="zoj__photo_item" data-zoom><div class="ph"><img src="img/p04.webp" alt="Алина с игрушечной обезьянкой" decoding="async"></div></div>
     </div>
   </div>
 </section>
 
 <section class="gang sec_white sec_zi">
   <div class="container">
-    <div class="gang__141 ekran">#забота
+    <div class="gang__141 ekran"><span data-text="gang_tag" data-label="Близкий круг: большой хэштег">#забота</span>
       <div class="gang__blood"></div>
     </div>
     <div class="gang__text inner_grid">
-      <div class="gang__text_item p_text">близкий круг</div>
-      <div class="gang__text_item p_text">Тёплые связи вне смены</div>
-      <div class="gang__text_item p_text">Вокруг неё собрался свой круг людей: семья, подруги и коллеги, с которыми проще пережить любую смену</div>
+      <div class="gang__text_item p_text" data-text="gang_k1" data-label="Близкий круг: подпись 1">близкий круг</div>
+      <div class="gang__text_item p_text" data-text="gang_k2" data-label="Близкий круг: подпись 2">Тёплые связи вне смены</div>
+      <div class="gang__text_item p_text" data-text="gang_k3" data-label="Близкий круг: текст">Вокруг неё собрался свой круг людей: семья, подруги и коллеги, с которыми проще пережить любую смену</div>
     </div>
     <div class="gang__list_wrap">
-      <div class="gang__list_title p_text">те, кто рядом</div>
+      <div class="gang__list_title p_text" data-text="gang_list_title" data-label="Близкий круг: заголовок списка">те, кто рядом</div>
       <div class="gang__list">
-        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran">семья</div><div class="gang__list_item_name p_text">всегда рядом</div></div>
-        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran">подруги</div><div class="gang__list_item_name p_text">для разговоров</div></div>
-        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran">коллеги</div><div class="gang__list_item_name p_text">по смене</div></div>
-        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran">друзья</div><div class="gang__list_item_name p_text">на связи</div></div>
-        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran">мы</div><div class="gang__list_item_name p_text">гордимся</div></div>
+        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran" data-text="circle1_nick" data-label="Человек 1: имя или ник (пусто — скрыть)" data-hide-empty>семья</div><div class="gang__list_item_name p_text" data-text="circle1_name" data-label="Человек 1: подпись">всегда рядом</div></div>
+        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran" data-text="circle2_nick" data-label="Человек 2: имя или ник (пусто — скрыть)" data-hide-empty>подруги</div><div class="gang__list_item_name p_text" data-text="circle2_name" data-label="Человек 2: подпись">для разговоров</div></div>
+        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran" data-text="circle3_nick" data-label="Человек 3: имя или ник (пусто — скрыть)" data-hide-empty>коллеги</div><div class="gang__list_item_name p_text" data-text="circle3_name" data-label="Человек 3: подпись">по смене</div></div>
+        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran" data-text="circle4_nick" data-label="Человек 4: имя или ник (пусто — скрыть)" data-hide-empty>друзья</div><div class="gang__list_item_name p_text" data-text="circle4_name" data-label="Человек 4: подпись">на связи</div></div>
+        <div class="gang__list_item"><div class="gang__list_item_nick sub_title ekran" data-text="circle5_nick" data-label="Человек 5: имя или ник (пусто — скрыть)" data-hide-empty>мы</div><div class="gang__list_item_name p_text" data-text="circle5_name" data-label="Человек 5: подпись">гордимся</div></div>
+        <div class="gang__list_item" hidden><div class="gang__list_item_nick sub_title ekran" data-text="circle6_nick" data-label="Человек 6: имя или ник (пусто — скрыть)" data-hide-empty></div><div class="gang__list_item_name p_text" data-text="circle6_name" data-label="Человек 6: подпись"></div></div>
+        <div class="gang__list_item" hidden><div class="gang__list_item_nick sub_title ekran" data-text="circle7_nick" data-label="Человек 7: имя или ник (пусто — скрыть)" data-hide-empty></div><div class="gang__list_item_name p_text" data-text="circle7_name" data-label="Человек 7: подпись"></div></div>
+        <div class="gang__list_item" hidden><div class="gang__list_item_nick sub_title ekran" data-text="circle8_nick" data-label="Человек 8: имя или ник (пусто — скрыть)" data-hide-empty></div><div class="gang__list_item_name p_text" data-text="circle8_name" data-label="Человек 8: подпись"></div></div>
       </div>
     </div>
   </div>
@@ -461,8 +179,8 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
     </div>
     <div class="big_vid__text">
       <div class="container">
-        <div class="big_vid__text__left p_text">Любимая<br>медсестра</div>
-        <div class="big_vid__text__right p_text">по версии друзей</div>
+        <div class="big_vid__text__left p_text" data-text="big_left" data-label="Большое окно: слева">Любимая<br>медсестра</div>
+        <div class="big_vid__text__right p_text" data-text="big_right" data-label="Большое окно: справа">по версии друзей</div>
       </div>
     </div>
   </div>
@@ -470,7 +188,7 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 
 <section class="time sec_white sec_zi">
   <div class="time__content">
-    <div class="time__title sub_title ekran">После<br>стольких смен?</div>
+    <div class="time__title sub_title ekran" data-text="time_title" data-label="Тоннель фото: заголовок">После<br>стольких смен?</div>
     <div class="time__list">
       <div class="time__item"><div class="ph"><img src="img/p03.webp" alt="" decoding="async"></div></div>
       <div class="time__item"><div class="ph"><img src="img/p10.webp" alt="" decoding="async"></div></div>
@@ -487,7 +205,7 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 
 <section class="slay sec_white sec_zi">
   <div class="slay__content">
-    <div class="slay__text ekran">как говорилось, заботились<br>тогда, и продолжаем<br>дальше заботиться</div>
+    <div class="slay__text ekran" data-text="slay_text" data-label="Фраза с сердечками">как говорилось, заботились<br>тогда, и продолжаем<br>дальше заботиться</div>
     <svg class="slay__prize" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
     <svg class="slay__prize" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cross"/></svg>
     <svg class="slay__prize" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
@@ -496,30 +214,30 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 
 <section class="victims sec_white sec_zi">
   <div class="container">
-    <div class="victims__title"><div class="victims__title_big ekran">Смены</div></div>
+    <div class="victims__title"><div class="victims__title_big ekran" data-text="shifts_title" data-label="Смены: заголовок">Смены</div></div>
     <div class="victims__list">
-      <div class="victims__item"><div class="victims__item_photo ph"><img src="img/p14.webp" alt="" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text">закрыта с теплом</div></div></div>
-      <div class="victims__item"><div class="victims__item_photo ph"><img src="img/p13.webp" alt="" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text">закрыта с теплом</div></div></div>
-      <div class="victims__item"><div class="victims__item_photo ph"><img src="img/p12.webp" alt="" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text">закрыта с теплом</div></div></div>
-      <div class="victims__item"><div class="victims__item_photo ph"><img src="img/p05.webp" alt="" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text">закрыта с теплом</div></div></div>
+      <div class="victims__item" data-zoom><div class="victims__item_photo ph"><img src="img/p14.webp" alt="Алина в белом халате" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text" data-text="shift_status" data-label="Смены: статус на карточках">закрыта с теплом</div></div></div>
+      <div class="victims__item" data-zoom><div class="victims__item_photo ph"><img src="img/p13.webp" alt="Алина улыбается за рабочим столом" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text" data-text="shift_status">закрыта с теплом</div></div></div>
+      <div class="victims__item" data-zoom><div class="victims__item_photo ph"><img src="img/p12.webp" alt="Алина дома" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text" data-text="shift_status">закрыта с теплом</div></div></div>
+      <div class="victims__item" data-zoom><div class="victims__item_photo ph"><img src="img/p05.webp" alt="Алина в парке" decoding="async"></div><svg class="victims__item_x" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg><div class="victims__item_status"><div class="victims__item_status_title">статус</div><div class="victims__item_status_block p_text" data-text="shift_status">закрыта с теплом</div></div></div>
     </div>
   </div>
 </section>
 
 <section class="kursk sec_white sec_zi">
   <div class="kursk__content">
-    <div class="kursk__img_wrap_wrap"><div class="kursk__img_wrap"><div class="ph"><img src="img/p11.webp" alt="" decoding="async"></div></div></div>
+    <div class="kursk__img_wrap_wrap"><div class="kursk__img_wrap" data-zoom><div class="ph"><img src="img/p11.webp" alt="Алина в рабочей форме" decoding="async"></div></div></div>
     <div class="kursk__text">
-      <div class="kursk__text_up ekran">медсестра</div>
-      <div class="kursk__text_down ekran">всегда на смене</div>
+      <div class="kursk__text_up ekran" data-text="kursk_up" data-label="Две строки, которые разъезжаются: верхняя">медсестра</div>
+      <div class="kursk__text_down ekran" data-text="kursk_down" data-label="Две строки, которые разъезжаются: нижняя">всегда на смене</div>
     </div>
   </div>
 </section>
 
 <section class="menace sec_white sec_zi">
   <div class="menace__content">
-    <div class="menace__word ekran">Всё</div>
-    <div class="menace__word ekran">хорошо?</div>
+    <div class="menace__word ekran" data-text="menace1" data-label="Дрожащие слова: первое">Всё</div>
+    <div class="menace__word ekran" data-text="menace2" data-label="Дрожащие слова: второе">хорошо?</div>
     <div class="menace__kus">
       <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
       <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cross"/></svg>
@@ -528,9 +246,57 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
   </div>
 </section>
 
+<!-- ======== новые разделы ======== -->
+
+<section class="compliment block sec_black sec_zi" id="compliment">
+  <div class="container" data-rise>
+    <p class="kicker" data-text="compliment_kicker" data-label="Комплимент: подпись сверху">комплимент дня</p>
+    <p class="compliment__text" id="compText">Ты делаешь мир спокойнее одним своим присутствием.</p>
+    <button class="btn" type="button" id="compNext">Ещё комплимент</button>
+  </div>
+</section>
+
+<section class="thoughts block sec_black sec_zi" id="thoughts" hidden>
+  <div class="container">
+    <p class="kicker">записи</p>
+    <h2 class="sec-title ekran" data-text="thoughts_title" data-label="Мысли: заголовок">мысли</h2>
+    <div class="posts" id="postsList"></div>
+  </div>
+</section>
+
+<section class="gallery block sec_black sec_zi" id="gallery" hidden>
+  <div class="container">
+    <p class="kicker">галерея</p>
+    <h2 class="sec-title ekran" data-text="gallery_title" data-label="Галерея: заголовок">ещё кадры</h2>
+    <div class="gallery-grid" id="galleryGrid" data-zoom></div>
+  </div>
+</section>
+
+<section class="voices block sec_black sec_zi" id="voices" hidden>
+  <div class="container">
+    <p class="kicker">от друзей</p>
+    <h2 class="sec-title ekran" data-text="voices_title" data-label="Голоса друзей: заголовок">голоса друзей</h2>
+    <div class="voices-list" id="voicesList"></div>
+  </div>
+</section>
+
+<section class="quiz block sec_black sec_zi" id="quiz" hidden>
+  <div class="container">
+    <p class="kicker">игра</p>
+    <h2 class="sec-title ekran" data-text="quiz_title" data-label="Квиз: заголовок">насколько хорошо ты знаешь алину?</h2>
+    <div class="quiz-wrap">
+      <div class="quiz-card card" id="quizCard" aria-live="polite"></div>
+      <div>
+        <p class="kicker">лучшие результаты</p>
+        <ol class="top-list" id="quizTop"><li><span class="muted">Пока никто не играл</span></li></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="reviews sec_black sec_zi" id="reviews">
   <div class="container">
-    <h2 class="reviews__title ekran">добрые слова</h2>
+    <h2 class="reviews__title ekran" data-text="reviews_title" data-label="Отзывы: заголовок">добрые слова</h2>
     <div class="rev-grid">
       <form class="form" id="rform" novalidate>
         <label for="rname">Ваше имя
@@ -539,6 +305,7 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
         <label for="rtext">Ваш отзыв
           <textarea id="rtext" name="rtext" maxlength="600" placeholder="Расскажите, чем запомнилась забота и внимание"></textarea>
         </label>
+        <label class="hp" aria-hidden="true">Сайт <input id="rweb" name="website" type="text" tabindex="-1" autocomplete="off"></label>
         <div><button class="btn" id="rsend" type="submit">Отправить отзыв</button></div>
         <p class="note" id="rnote" role="status"></p>
       </form>
@@ -548,18 +315,64 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
   </div>
 </section>
 
+<section class="wishes block sec_black sec_zi" id="wishes">
+  <div class="container">
+    <p class="kicker" data-text="wishes_kicker" data-label="Поздравления: подпись сверху">1 ноября</p>
+    <h2 class="sec-title ekran" data-text="wishes_title" data-label="Поздравления: заголовок">стена поздравлений</h2>
+    <p class="wishes__teaser" id="wishTeaser" hidden></p>
+    <div class="wish-wall" id="wishWall" hidden></div>
+    <form class="form wishes-form" id="wform" novalidate>
+      <label for="wname">Ваше имя
+        <input id="wname" name="wname" type="text" maxlength="60" autocomplete="name" placeholder="От кого поздравление">
+      </label>
+      <label for="wtext">Поздравление
+        <textarea id="wtext" name="wtext" maxlength="600" placeholder="Пожелайте Алине что-нибудь тёплое"></textarea>
+      </label>
+      <label class="hp" aria-hidden="true">Сайт <input id="wweb" name="website" type="text" tabindex="-1" autocomplete="off"></label>
+      <div><button class="btn" id="wsend" type="submit">Отправить поздравление</button></div>
+      <p class="note" id="wnote" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="letter block sec_black sec_zi" id="letter">
+  <div class="container">
+    <p class="kicker" data-text="letter_kicker" data-label="Письмо: подпись сверху">только для неё</p>
+    <h2 class="sec-title ekran" data-text="letter_title" data-label="Письмо: заголовок">секретное письмо</h2>
+    <div class="letter__inner">
+      <div class="envelope" id="envelope" aria-hidden="true">
+        <div class="envelope__back"></div>
+        <div class="envelope__paper"></div>
+        <div class="envelope__front"></div>
+        <div class="envelope__flap"></div>
+        <div class="envelope__seal"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></div>
+      </div>
+      <form class="letter-form" id="lform" novalidate>
+        <p class="p_text" data-text="letter_sub" data-label="Письмо: пояснение">Письмо откроется, если ввести кодовое слово.</p>
+        <p class="note" id="lhint" data-text="letter_hint" data-label="Письмо: подсказка (публичная)">Подсказка: то, что знаем только мы двое</p>
+        <div class="row">
+          <input id="lcode" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Кодовое слово" aria-label="Кодовое слово">
+          <button class="btn" type="submit" id="lopen">Открыть</button>
+        </div>
+        <p class="note" id="lnote" role="status"></p>
+      </form>
+    </div>
+    <div class="letter-paper" id="letterPaper" hidden></div>
+  </div>
+</section>
+
 <footer class="footer sec_black sec_zi">
   <div class="container">
-    <div class="footer__top p_text">для Алиночки, с теплом</div>
-    <div class="footer__center"><svg class="footer__img" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg></div>
+    <div class="footer__top p_text" data-text="footer_top" data-label="Подвал: строка сверху">для Алиночки, с теплом</div>
+    <div class="footer__center"><svg class="footer__img" id="footerHeart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg></div>
     <div class="footer__bottom">
-      <div class="footer__bottom_text p_text">alina archive</div>
-      <div class="footer__bottom_text p_text">сделано с любовью</div>
+      <div class="footer__bottom_text p_text" data-text="footer_b1" data-label="Подвал: слева">alina archive</div>
+      <div class="footer__bottom_text p_text" data-text="footer_b2" data-label="Подвал: по центру">сделано с любовью</div>
       <div class="footer__bottom_text p_text">© 2026</div>
     </div>
   </div>
   <div class="footer__marquee" aria-hidden="true">
-    <div class="track"><p>special for alina</p><p>для алиночки</p><p>special for alina</p><p>для алиночки</p></div>
+    <div class="track"><p data-text="marquee1" data-label="Бегущая строка в подвале: 1">special for alina</p><p data-text="marquee2" data-label="Бегущая строка в подвале: 2">для алиночки</p><p data-text="marquee1">special for alina</p><p data-text="marquee2">для алиночки</p></div>
   </div>
 </footer>
 
@@ -569,274 +382,23 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 </div>
 <div class="smoke" id="smoke" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="grain" aria-hidden="true"></div>
-<a class="btn to-reviews" href="#reviews">Оставить отзыв</a>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<a class="btn to-reviews" id="floatBtn" href="#reviews">Оставить отзыв</a>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button type="button" id="lbClose">Закрыть</button>
+  <div><img id="lbImg" alt=""><p id="lbCap"></p></div>
+</div>
+<div class="egg" id="egg" hidden>
+  <figure><img src="img/p04.webp" alt="Алина с обезьянкой"><figcaption>секретная обезьянка найдена</figcaption></figure>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-<script>
-(function () {
-  // Контакты: впишите значения, и блок появится. Пустое значение скрывает пункт.
-  var CONTACTS = [
-    { label: "Telegram", value: "" },
-    { label: "Телефон", value: "" }
-  ];
-
-  var $ = function (id) { return document.getElementById(id); };
-  var q = function (s) { return document.querySelector(s); };
-  var qa = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
-  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
-  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var rem = function (n) { return n * parseFloat(getComputedStyle(document.documentElement).fontSize); };
-  var hasG = !!(window.gsap && window.ScrollTrigger) && !reduce;
-
-  // ---- прелоадер
-  var pre = $("preloader"), pct = $("percent");
-  var loaded = document.readyState === "complete", cur = 0, started = performance.now(), finished = false;
-  window.addEventListener("load", function () { loaded = true; });
-  function endPreloader() {
-    if (finished) return; finished = true;
-    var done = function () { if (pre && pre.parentNode) pre.parentNode.removeChild(pre); playIntro(); };
-    if (hasG) gsap.to(pre, { opacity: 0, delay: .6, duration: .8, ease: "power2.out", onComplete: done });
-    else setTimeout(done, 300);
-  }
-  (function tick() {
-    var t = performance.now() - started;
-    var target = loaded ? 100 : Math.min(90, t / 2200 * 90);
-    if (t < 1800) target = Math.min(target, t / 1800 * 100);
-    cur += (target - cur) * .12;
-    pct.textContent = Math.round(cur) + "%";
-    if (loaded && t > 1800 && cur >= 99.4) { pct.textContent = "100%"; endPreloader(); return; }
-    requestAnimationFrame(tick);
-  })();
-
-  // ---- начальные состояния и вступление hero
-  var heroSpans = qa(".hero__main_text span");
-  var heroTexts = [".hero__content_bottom_text", ".hero__content_bottom_scroll"];
-  if (hasG) {
-    gsap.set(heroSpans, { opacity: 0, filter: "blur(" + rem(10) + "px)" });
-    gsap.set(heroTexts, { opacity: 0 });
-  }
-  function playIntro() {
-    if (!hasG) return;
-    var tl = gsap.timeline();
-    tl.to(heroSpans[0], { opacity: 1, filter: "blur(0px)", duration: .01, ease: "none" })
-      .to(heroSpans[1], { opacity: 1, filter: "blur(0px)", duration: .01, ease: "none" }, "+=0.7")
-      .to(heroSpans[2], { opacity: 1, filter: "blur(0px)", duration: .01, ease: "none" }, "+=0.7")
-      .to(heroTexts, { opacity: 1, duration: 1.5, ease: "power2.out", stagger: .08 }, "+=0.5");
-  }
-  // страховка: hero всегда показывается
-  setTimeout(function () {
-    if (hasG) { gsap.to(heroSpans, { opacity: 1, filter: "blur(0px)", duration: .3 }); gsap.to(heroTexts, { opacity: 1, duration: .3 }); }
-  }, 12000);
-
-  // ---- прокрутка
-  function initScroll() {
-    gsap.registerPlugin(ScrollTrigger);
-    if (window.Lenis) {
-      try {
-        var lenis = new Lenis({ autoRaf: true, duration: 1.8, smoothWheel: true });
-        lenis.on("scroll", ScrollTrigger.update);
-      } catch (e) {}
-    }
-
-    // фигуры по очереди
-    var neg = qa(".negative__item");
-    gsap.set(neg, { opacity: 0, filter: "blur(" + rem(20) + "px)" });
-    [["top -40%", 0], ["top -110%", 1], ["top -180%", 2]].forEach(function (p) {
-      ScrollTrigger.create({
-        trigger: ".negative", start: p[0],
-        animation: gsap.to(neg[p[1]], { opacity: 1, filter: "blur(0px)", duration: .5, paused: true }),
-        toggleActions: "play none none reverse"
-      });
-    });
-    ScrollTrigger.create({
-      trigger: ".negative", start: "top -250%",
-      animation: gsap.to(".negative__content", { opacity: 0, filter: "blur(" + rem(20) + "px)", duration: .5, paused: true }),
-      toggleActions: "play none none reverse"
-    });
-
-    // эмблема
-    gsap.set("#head", { xPercent: -50, yPercent: -50, left: "50%", top: "50%", x: 0, y: 0 });
-    gsap.to("#head", { scale: .85, opacity: .4, ease: "power3.inOut",
-      scrollTrigger: { trigger: ".iamgleb", start: "top top", end: "top+=40%", scrub: 1.2 } });
-
-    // «Я — …» едет вбок
-    gsap.fromTo(".iamgleb__content", { x: "110vw" }, { x: "-170vw", ease: "none",
-      scrollTrigger: { trigger: ".iamgleb", start: "top top", end: "bottom bottom", scrub: 1.2 } });
-    gsap.to(".iamgleb__gif:nth-child(2)", { x: "-650%", ease: "none", scrollTrigger: { trigger: ".iamgleb", start: "top top", end: "bottom bottom", scrub: 3 } });
-    gsap.to(".iamgleb__gif:nth-child(3)", { x: "-450%", ease: "none", scrollTrigger: { trigger: ".iamgleb", start: "top top", end: "bottom bottom", scrub: 3 } });
-    gsap.fromTo("#head", { scale: .85, opacity: .4 }, { scale: 1, opacity: 1, ease: "power3.inOut", immediateRender: false,
-      scrollTrigger: { trigger: ".iamgleb", start: "bottom-=30% bottom", end: "bottom bottom", scrub: 1.2 } });
-
-    // слова въезжают сверху
-    qa(".orpk__item").forEach(function (item) {
-      gsap.fromTo(item.querySelector(".orpk__item_text"), { y: "-100%" }, { y: "0%", ease: "none",
-        scrollTrigger: { trigger: item, start: "top bottom", end: "top center", scrub: true } });
-    });
-
-    // о ней: параллакс
-    gsap.fromTo(".about__img .ph img", { scale: 1.18 }, { scale: 1, ease: "none",
-      scrollTrigger: { trigger: ".about", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.to(".zoj__photo_item:nth-child(2)", { y: "-150%", ease: "none",
-      scrollTrigger: { trigger: ".zoj__photo_list", start: "top center", end: "bottom top", scrub: 1.5 } });
-
-    // круг
-    gsap.to(".gang__blood", { width: rem(1100), ease: "none", duration: .15,
-      scrollTrigger: { trigger: ".gang__141", start: "center 65%" } });
-    qa(".gang__list_item").forEach(function (item) {
-      gsap.fromTo(item, { opacity: 0 }, { opacity: 1, ease: "none",
-        scrollTrigger: { trigger: item, start: "top 90%", end: "center center", scrub: true } });
-    });
-
-    // призы
-    var prizes = qa(".slay__prize");
-    var pz = [{ x: 150, y: -250, r: 20, s: 1.2, sc: true }, { x: -120, y: 180, r: -15, s: .95, sc: 1.5 }, { x: 90, y: -120, r: 10, s: .85, sc: 1.5 }];
-    prizes.forEach(function (el, i) {
-      gsap.to(el, { x: rem(pz[i].x), y: rem(pz[i].y), rotate: pz[i].r, scale: pz[i].s, ease: "none",
-        scrollTrigger: { trigger: ".slay", start: "top 80%", end: "bottom 20%", scrub: pz[i].sc } });
-    });
-
-    // большое окно сжимается
-    gsap.to(".big_vid__anim", { scale: .4, ease: "none",
-      scrollTrigger: { trigger: ".big_vid", start: "top top", end: "bottom 120%", scrub: true } });
-    var frames = qa(".big_vid__anim_img"), fi = 0;
-    setInterval(function () {
-      frames[fi].style.opacity = 0; fi = (fi + 1) % frames.length; frames[fi].style.opacity = 1;
-    }, 400);
-
-    // тоннель кадров
-    var items = qa(".time__item");
-    var base = [[-520, -260], [-480, -120], [-560, 0], [-500, 140], [-540, 280], [520, -260], [480, -120], [560, 0], [500, 140]];
-    var pos = base.slice().sort(function () { return Math.random() - .5; });
-    items.forEach(function (it, i) {
-      gsap.set(it, { x: rem(pos[i][0]), y: rem(pos[i][1]), xPercent: -50, yPercent: -50, z: 1200, scale: 1.6, opacity: 0, filter: "blur(20px)" });
-    });
-    ScrollTrigger.create({
-      trigger: ".time", start: "top top", end: "bottom bottom", scrub: true,
-      onUpdate: function (self) {
-        var p = self.progress, delay = .3, len = 1 + delay * items.length;
-        items.forEach(function (item, i) {
-          var local = clamp(p * len - i * delay, 0, 1);
-          var z = gsap.utils.interpolate(1200, -4200, local);
-          var scale = gsap.utils.interpolate(1.6, .3, local);
-          var op = Math.min(clamp(local / .3, 0, 1), clamp((1 - local) / .3, 0, 1));
-          var blur = local < .5 ? gsap.utils.interpolate(20, 0, local / .5) : gsap.utils.interpolate(0, 20, (local - .5) / .5);
-          var pull = (1 - local) * 1.4;
-          gsap.set(item, { x: rem(pos[i][0]) * pull, y: rem(pos[i][1]) * (.9 + (1 - local) * .2), z: z, scale: scale, opacity: op, filter: "blur(" + blur + "px)" });
-        });
-      }
-    });
-    gsap.to(".time__title", { scale: .1, filter: "blur(" + rem(10) + "px)", opacity: 0, y: rem(150), ease: "none",
-      scrollTrigger: { trigger: ".time", start: "top top", end: "center center", scrub: true } });
-
-    // переход в чёрный
-    gsap.fromTo(".victims__title_big", { opacity: 0, filter: "blur(" + rem(20) + "px)" },
-      { opacity: 1, filter: "blur(0px)", duration: 1.2, delay: .3, ease: "power2.out",
-        scrollTrigger: { trigger: ".victims__title_big", start: "center center", toggleActions: "play none none reverse" } });
-    gsap.to(".victims__title", { opacity: 0, filter: "blur(" + rem(20) + "px)", duration: .8, ease: "power2.out", immediateRender: false,
-      scrollTrigger: { trigger: ".victims__item:last-child", start: "bottom top", toggleActions: "play none none reverse" } });
-    gsap.to(".sec_white", { backgroundColor: "#120d10", duration: .6, ease: "power2.out",
-      scrollTrigger: { trigger: ".victims__title_big", start: "center center", toggleActions: "play none none reverse" } });
-    gsap.to("#smoke", { opacity: 0, ease: "none", immediateRender: false,
-      scrollTrigger: { trigger: ".about", start: "top center", end: "top top", toggleActions: "play none none reverse" } });
-    gsap.fromTo("#smoke", { opacity: 0 }, { opacity: .5, ease: "none", immediateRender: false,
-      scrollTrigger: { trigger: ".victims__title_big", start: "center center", toggleActions: "play none none reverse" } });
-
-    // дрожь слов
-    function shake(sel, x, y, dur, delay) {
-      gsap.set(sel, { x: 0, y: 0 });
-      gsap.to(sel, { x: function () { return gsap.utils.random(-x, x); }, y: function () { return gsap.utils.random(-y, y); },
-        duration: dur, ease: "none", repeat: -1, repeatRefresh: true, delay: delay || 0 });
-    }
-    shake(".menace__word:nth-child(1)", rem(2), rem(4), .04);
-    shake(".menace__word:nth-child(2)", rem(5), rem(2), .04, .03);
-
-    // фото-карточка и текст расходятся
-    gsap.to(".kursk__img_wrap_wrap", { y: rem(650), ease: "none", scrollTrigger: { trigger: ".kursk", start: "top bottom", end: "center -20%", scrub: true } });
-    gsap.to(".kursk__img_wrap", { width: rem(450), height: rem(592), ease: "none", scrollTrigger: { trigger: ".kursk", start: "top bottom", end: "top top", scrub: true } });
-    gsap.to(".kursk__text_up", { x: rem(-350), ease: "none", scrollTrigger: { trigger: ".kursk__text", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.to(".kursk__text_down", { x: rem(350), ease: "none", scrollTrigger: { trigger: ".kursk__text", start: "top bottom", end: "bottom top", scrub: true } });
-
-    gsap.timeline({ scrollTrigger: { trigger: ".menace", start: "top center", end: "bottom center", scrub: true } })
-      .to(".menace__kus svg:nth-child(1)", { x: rem(-70), y: rem(-40), rotation: -18, scale: .6, ease: "none" }, 0)
-      .to(".menace__kus svg:nth-child(3)", { x: rem(150), y: rem(20), rotation: 18, scale: 1.3, ease: "none" }, 0);
-
-    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
-  }
-  if (hasG) { try { initScroll(); } catch (e) { console.error(e); } }
-
-  // ---- контакты
-  (function () {
-    var filled = CONTACTS.filter(function (c) { return c.value; });
-    if (!filled.length) return;
-    $("contacts").hidden = false;
-    filled.forEach(function (c) {
-      var box = document.createElement("div"); box.className = "copy-field";
-      var span = document.createElement("span"); span.textContent = c.label + ": " + c.value;
-      var b = document.createElement("button"); b.type = "button"; b.className = "btn"; b.textContent = "Копировать";
-      b.addEventListener("click", function () {
-        var done = function () { b.textContent = "Скопировано"; setTimeout(function () { b.textContent = "Копировать"; }, 1800); };
-        try {
-          navigator.clipboard.writeText(c.value).then(done, function () {
-            var r = document.createRange(); r.selectNodeContents(span);
-            var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-          });
-        } catch (e) {}
-      });
-      box.appendChild(span); box.appendChild(b); $("clist").appendChild(box);
-    });
-  })();
-
-  // ---- отзывы (Supabase)
-  var SB_URL = "https://uskqeryhyyhcoghsximq.supabase.co";
-  var SB_KEY = "sb_publishable_d_MPDveGQK_YKL-B8epTqw_tyX8zBb5";
-  var list = $("rlist"), note = $("rnote"), send = $("rsend"), form = $("rform");
-  var items = [];
-  function setNote(t, err) { note.textContent = t || ""; note.className = "note" + (err ? " err" : ""); }
-  function emptyMsg(t) { list.textContent = ""; var p = document.createElement("p"); p.className = "empty"; p.textContent = t; list.appendChild(p); }
-  function sb(path, opts) {
-    opts = opts || {};
-    opts.headers = Object.assign({ apikey: SB_KEY, "Content-Type": "application/json" }, opts.headers || {});
-    return fetch(SB_URL + "/rest/v1/" + path, opts).then(function (r) {
-      if (!r.ok) throw new Error("http " + r.status);
-      return r.status === 201 || r.status === 204 ? null : r.json();
-    });
-  }
-  function render() {
-    if (!items.length) { emptyMsg("Здесь появятся добрые слова. Будьте первым, кто оставит отзыв."); return; }
-    list.textContent = "";
-    items.forEach(function (d) {
-      var box = document.createElement("article"); box.className = "rev";
-      var qq = document.createElement("q"); qq.textContent = String(d.text || "");
-      var who = document.createElement("div"); who.className = "who";
-      var n = document.createElement("strong"); n.textContent = String(d.name || "Гость");
-      var dt = document.createElement("span");
-      dt.textContent = d.created_at ? new Date(d.created_at).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }) : "";
-      who.appendChild(n); who.appendChild(dt);
-      box.appendChild(qq); box.appendChild(who); list.appendChild(box);
-    });
-    if (window.ScrollTrigger) ScrollTrigger.refresh();
-  }
-  function load() {
-    return sb("reviews?select=name,text,created_at&order=created_at.desc&limit=100")
-      .then(function (rows) { items = rows || []; render(); })
-      .catch(function () { emptyMsg("Не получилось загрузить отзывы. Обновите страницу."); });
-  }
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var text = $("rtext").value.trim();
-    var name = $("rname").value.trim().slice(0, 60) || "Гость";
-    if (text.length < 5) { setNote("Напишите хотя бы пару слов.", true); return; }
-    send.disabled = true; setNote("Отправляю…");
-    sb("reviews", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ name: name, text: text.slice(0, 600) }) })
-      .then(function () { $("rtext").value = ""; setNote("Спасибо! Ваш отзыв опубликован."); return load(); })
-      .catch(function () { setNote("Не получилось отправить. Попробуйте ещё раз чуть позже.", true); })
-      .then(function () { send.disabled = false; });
-  });
-  load();
-})();
-</script>
-
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+<script src="js/features.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

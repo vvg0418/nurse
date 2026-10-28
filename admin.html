@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>alina · админка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23120d10'/%3E%3Cpath fill='%23ff3d8b' d='M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Рабочая панель: шапка с вкладками, под ней одна колонка карточек. */
+:root {
+  --bg: #120d10; --panel: #1c1418; --panel-2: #241a1f; --line: #3a2a33;
+  --text: #f2e8ed; --muted: #a8949f; --pink: #ff3d8b; --ok: #4fc98c; --warn: #f2b84b;
+  --f-display: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 var(--f-body);
+  padding: 0 max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+a { color: var(--pink); }
+:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.wrap { max-width: 980px; margin: 0 auto; }
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 16px 0 0; border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 28px; color: var(--pink); letter-spacing: -.01em; }
+.brand small { font-family: var(--f-body); font-weight: 500; font-size: 13px; color: var(--muted); margin-left: 8px; }
+.env { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--warn); }
+.env.prod { color: var(--ok); }
+.tabs { display: flex; gap: 4px; overflow-x: auto; margin-top: 12px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { font: inherit; font-weight: 600; background: none; border: 0; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--pink); }
+.tab .badge { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: var(--pink); color: var(--bg); font-size: 12px; text-align: center; }
+main { padding-top: 24px; }
+h2 { font-family: var(--f-display); font-weight: 500; font-size: 26px; margin: 0 0 6px; }
+.lead { color: var(--muted); margin: 0 0 20px; max-width: 70ch; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.stack { display: grid; gap: 12px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.row > * { min-width: 0; }
+label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+input[type=text], input[type=email], input[type=password], input[type=number], input[type=datetime-local], textarea, select {
+  font: inherit; font-size: 16px; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; }
+textarea { min-height: 96px; resize: vertical; }
+input:focus, textarea:focus, select:focus { border-color: var(--pink); outline: none; }
+.btn { font: inherit; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--pink); background: var(--pink); color: var(--bg); white-space: nowrap; }
+.btn.ghost { background: transparent; color: var(--pink); }
+.btn.quiet { background: transparent; color: var(--muted); border-color: var(--line); }
+.btn.danger { background: transparent; color: #ff8fb8; border-color: #6a2a45; }
+.btn.danger.armed { background: #ff3d8b; color: var(--bg); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.note { color: var(--muted); font-size: 13px; min-height: 1.4em; margin: 0; }
+.note.err { color: #ff9fc4; }
+.note.ok { color: var(--ok); }
+.list { display: grid; gap: 10px; }
+.item { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
+.item p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.meta { display: flex; gap: 8px 14px; flex-wrap: wrap; color: var(--muted); font-size: 13px; align-items: center; }
+.pill { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); }
+.pill.pending { color: var(--warn); border-color: #5a4520; }
+.pill.on { color: var(--ok); border-color: #1f4a35; }
+.pill.off { color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { font: inherit; font-size: 13px; font-weight: 600; background: none; border: 0; color: var(--muted); padding: 7px 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--pink); color: var(--bg); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.thumb { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: grid; }
+.thumb img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.thumb .stack { padding: 10px; gap: 8px; }
+.empty { color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; margin: 0; }
+.login { max-width: 420px; margin: 12vh auto 0; }
+.field-group { display: grid; gap: 14px; }
+.text-field { display: grid; gap: 6px; padding: 14px 0; border-top: 1px solid var(--line); }
+.text-field:first-child { border-top: 0; }
+.text-field .row { justify-content: flex-end; }
+.changed { color: var(--warn); font-size: 12px; font-weight: 700; }
+.steps { margin: 0; padding-left: 20px; color: var(--muted); }
+.steps li { margin: 4px 0; }
+code { background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: 13px; }
+.switch { display: flex; gap: 10px; align-items: center; color: var(--text); font-size: 15px; font-weight: 500; }
+.switch input { width: 20px; height: 20px; accent-color: var(--pink); }
+progress { width: 100%; accent-color: var(--pink); }
+@media (max-width: 560px) { .brand { font-size: 24px; } .item .row .btn { flex: 1; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="login" id="loginView" hidden>
+    <div class="brand">alina <small>админка</small></div>
+    <p class="lead" style="margin-top:8px">Здесь одобряют отзывы и поздравления, добавляют фото и меняют тексты сайта.</p>
+    <form class="card stack" id="loginForm" novalidate>
+      <label>Почта <input type="email" id="lEmail" autocomplete="username" required></label>
+      <label>Пароль <input type="password" id="lPass" autocomplete="current-password" required></label>
+      <label id="lPass2Wrap" hidden>Пароль ещё раз <input type="password" id="lPass2" autocomplete="new-password"></label>
+      <div class="row"><button class="btn" type="submit" id="lBtn">Войти</button>
+        <button class="btn quiet" type="button" id="lMode">Первый вход: создать пароль</button></div>
+      <p class="note" id="lNote" role="status"></p>
+    </form>
+  </section>
+
+  <div id="appView" hidden>
+    <header>
+      <div class="top">
+        <div class="row"><div class="brand">alina <small>админка</small></div><span class="env" id="envBadge"></span></div>
+        <div class="row"><a href="./" target="_blank" rel="noopener">Открыть сайт</a><span class="note" id="whoami"></span><button class="btn quiet" type="button" id="logout">Выйти</button></div>
+      </div>
+      <nav class="tabs" role="tablist" id="tabs">
+        <button class="tab" role="tab" data-tab="reviews">Отзывы <span class="badge" id="badgeReviews" hidden></span></button>
+        <button class="tab" role="tab" data-tab="wishes">Поздравления <span class="badge" id="badgeWishes" hidden></span></button>
+        <button class="tab" role="tab" data-tab="posts">Мысли</button>
+        <button class="tab" role="tab" data-tab="photos">Фото</button>
+        <button class="tab" role="tab" data-tab="voices">Голоса</button>
+        <button class="tab" role="tab" data-tab="quiz">Квиз</button>
+        <button class="tab" role="tab" data-tab="letter">Письмо</button>
+        <button class="tab" role="tab" data-tab="texts">Тексты</button>
+        <button class="tab" role="tab" data-tab="settings">Настройки</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- отзывы и поздравления -->
+      <section data-panel="reviews" hidden>
+        <h2>Отзывы</h2>
+        <p class="lead">Новые отзывы видны на сайте только после того, как вы нажмёте «Показать». Отключить проверку можно в настройках.</p>
+        <div class="row" style="margin-bottom:14px"><div class="seg" data-filter-for="review">
+          <button type="button" data-f="pending" aria-pressed="true">Ждут проверки</button><button type="button" data-f="approved" aria-pressed="false">На сайте</button><button type="button" data-f="hidden" aria-pressed="false">Скрытые</button></div></div>
+        <div class="list" id="listReview"></div>
+      </section>
+      <section data-panel="wishes" hidden>
+        <h2>Поздравления</h2>
+        <p class="lead" id="wishLead">Поздравления появятся на сайте в день открытия стены, и только одобренные.</p>
+        <div class="row" style="margin-bottom:14px"><div class="seg" data-filter-for="wish">
+          <button type="button" data-f="pending" aria-pressed="true">Ждут проверки</button><button type="button" data-f="approved" aria-pressed="false">Одобренные</button><button type="button" data-f="hidden" aria-pressed="false">Скрытые</button></div></div>
+        <div class="list" id="listWish"></div>
+      </section>
+
+      <!-- мысли -->
+      <section data-panel="posts" hidden>
+        <h2>Мысли</h2>
+        <p class="lead">Короткие записи, которые появятся на сайте отдельным разделом. Пока записей нет, раздела на сайте не видно.</p>
+        <form class="card stack" id="postForm" novalidate>
+          <label>Новая запись <textarea id="postText" maxlength="4000" placeholder="О чём думается сегодня"></textarea></label>
+          <div class="row"><button class="btn" type="submit">Опубликовать</button><p class="note" id="postNote" role="status"></p></div>
+        </form>
+        <div class="list" id="listPosts" style="margin-top:16px"></div>
+      </section>
+
+      <!-- фото -->
+      <section data-panel="photos" hidden>
+        <h2>Фото</h2>
+        <p class="lead">Фото попадут в раздел «ещё кадры». Перед загрузкой они уменьшаются до 1600 точек, так сайт открывается быстрее.</p>
+        <div class="card stack">
+          <label>Выберите фото (можно несколько) <input type="file" id="photoFiles" accept="image/*" multiple></label>
+          <progress id="photoProg" max="1" value="0" hidden></progress>
+          <p class="note" id="photoNote" role="status"></p>
+        </div>
+        <div class="grid" id="listPhotos" style="margin-top:16px"></div>
+      </section>
+
+      <!-- голоса -->
+      <section data-panel="voices" hidden>
+        <h2>Голоса друзей</h2>
+        <p class="lead">Короткие голосовые или видео от друзей, до 50 МБ каждое. Раздел появится на сайте, когда здесь будет хотя бы одна запись.</p>
+        <form class="card stack" id="voiceForm" novalidate>
+          <div class="row"><label style="flex:1">Кто записал <input type="text" id="voiceName" maxlength="80" placeholder="Например: Лиза"></label>
+            <label style="flex:2">Подпись (необязательно) <input type="text" id="voiceNote" maxlength="300" placeholder="Например: подруга со школы"></label></div>
+          <label>Файл <input type="file" id="voiceFile" accept="audio/*,video/*"></label>
+          <div class="row"><button class="btn" type="submit">Загрузить</button><p class="note" id="voiceNoteMsg" role="status"></p></div>
+        </form>
+        <div class="list" id="listVoices" style="margin-top:16px"></div>
+      </section>
+
+      <!-- квиз -->
+      <section data-panel="quiz" hidden>
+        <h2>Квиз</h2>
+        <p class="lead">Вопросы о ней. Варианты ответов пишите каждый с новой строки и укажите номер правильного.</p>
+        <form class="card stack" id="quizForm" novalidate>
+          <input type="hidden" id="quizId">
+          <label>Вопрос <input type="text" id="quizQ" maxlength="300"></label>
+          <label>Варианты, каждый с новой строки (от 2 до 6) <textarea id="quizOpts"></textarea></label>
+          <div class="row"><label style="width:200px">Номер правильного <input type="number" id="quizAns" min="1" max="6" value="1"></label>
+            <label style="width:120px">Порядок <input type="number" id="quizSort" value="0"></label></div>
+          <div class="row"><button class="btn" type="submit" id="quizSave">Добавить вопрос</button><button class="btn quiet" type="button" id="quizCancel" hidden>Отменить правку</button><p class="note" id="quizNote" role="status"></p></div>
+        </form>
+        <div class="list" id="listQuiz" style="margin-top:16px"></div>
+        <div class="card stack" style="margin-top:16px">
+          <div class="row" style="justify-content:space-between"><strong>Таблица результатов</strong><button class="btn danger" type="button" id="quizClear">Очистить таблицу</button></div>
+          <p class="note" id="quizClearNote">Результаты сбрасываются отдельно от вопросов. Если меняете количество вопросов, старые результаты лучше очистить.</p>
+        </div>
+      </section>
+
+      <!-- письмо -->
+      <section data-panel="letter" hidden>
+        <h2>Секретное письмо</h2>
+        <p class="lead">Текст хранится в базе и не попадает в код страницы. Его видно только после ввода правильного кодового слова.</p>
+        <form class="card stack" id="letterForm" novalidate>
+          <label>Текст письма <textarea id="letterText" style="min-height:260px" maxlength="20000"></textarea></label>
+          <label>Подсказка на сайте (её видят все) <input type="text" id="letterHint" maxlength="300"></label>
+          <label>Кодовые слова через запятую <input type="text" id="letterCodes" autocomplete="off" placeholder="Например: 12.06, 12 июня"></label>
+          <p class="note" id="letterCodesState">Регистр и лишние пробелы не важны. Оставьте поле пустым, чтобы не менять текущие коды.</p>
+          <div class="row"><button class="btn" type="submit">Сохранить письмо</button><p class="note" id="letterNote" role="status"></p></div>
+        </form>
+      </section>
+
+      <!-- тексты -->
+      <section data-panel="texts" hidden>
+        <h2>Тексты сайта</h2>
+        <p class="lead">Любую надпись на сайте можно заменить. Перенос строки в поле станет переносом на сайте. «Как было» возвращает исходный текст.</p>
+        <div class="card"><div class="field-group" id="textFields"><p class="empty">Загружаю тексты…</p></div></div>
+      </section>
+
+      <!-- настройки -->
+      <section data-panel="settings" hidden>
+        <h2>Настройки</h2>
+        <div class="stack">
+          <form class="card stack" id="setForm" novalidate>
+            <label class="switch"><input type="checkbox" id="setAuto"> Показывать новые отзывы и поздравления сразу, без проверки</label>
+            <label>Когда открыть стену поздравлений <input type="datetime-local" id="setReveal"></label>
+            <p class="note">До этого момента гости видят только счётчик поздравлений. Время указывается по часам вашего устройства.</p>
+            <div class="row"><label style="flex:1">Telegram для контактов <input type="text" id="setTg" placeholder="@ник" maxlength="100"></label>
+              <label style="flex:1">Instagram <input type="text" id="setIg" placeholder="@ник" maxlength="100"></label>
+              <label style="flex:1">Телефон <input type="text" id="setPhone" maxlength="40"></label></div>
+            <p class="note">Пустые поля не показываются на сайте.</p>
+            <div class="row"><button class="btn" type="submit">Сохранить настройки</button><p class="note" id="setNote" role="status"></p></div>
+          </form>
+
+          <div class="card stack">
+            <strong>Уведомления в Telegram</strong>
+            <ol class="steps">
+              <li>Создайте бота у <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> командой <code>/newbot</code> и скопируйте токен.</li>
+              <li>Откройте Supabase → проект → Edge Functions → Secrets и добавьте секрет <code>TELEGRAM_BOT_TOKEN</code> со значением токена. Токен никуда больше вставлять не нужно.</li>
+              <li>Нажмите «Подключить бота» ниже.</li>
+              <li>Напишите своему боту <code>/start</code>: он пришлёт chat id. Вставьте его в поле и сохраните.</li>
+              <li>Нажмите «Проверить»: бот пришлёт тестовое сообщение. Дальше о каждом новом отзыве будет приходить сообщение с кнопками «Показать», «Скрыть», «Удалить».</li>
+            </ol>
+            <div class="row"><label style="flex:1">Chat id <input type="text" id="setChat" inputmode="numeric" maxlength="40"></label></div>
+            <div class="row"><button class="btn" type="button" id="tgSaveChat">Сохранить chat id</button><button class="btn ghost" type="button" id="tgSetup">Подключить бота</button><button class="btn ghost" type="button" id="tgTest">Проверить</button></div>
+            <p class="note" id="tgNote" role="status"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
