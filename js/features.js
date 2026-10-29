@@ -687,6 +687,7 @@
     applyTexts();
     applyBirthday();
     initContacts();
+    show($("letter"), TEXTS.letter_enabled === "true");
     loadReviews();
     loadWishes();
     loadPosts();

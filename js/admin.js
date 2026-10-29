@@ -418,12 +418,14 @@
   loaders.quiz = loadQuiz;
 
   // ---------- письмо ----------
+  var letterCodeCount = 0;
   function loadLetter() {
     api("site_texts?select=key,value&key=in.(secret_letter_text,letter_hint,secret_letter_hashes)").then(function (rows) {
       var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
       $("letterText").value = m.secret_letter_text || "";
       $("letterHint").value = m.letter_hint || "";
       var n = (m.secret_letter_hashes || "").split(",").filter(Boolean).length;
+      letterCodeCount = n;
       $("letterCodesState").textContent = (n ? "Сейчас задано кодовых слов: " + n + ". " : "Кодовые слова ещё не заданы. ") + "Регистр и лишние пробелы не важны. Оставьте поле пустым, чтобы не менять текущие коды.";
     });
   }
@@ -433,7 +435,17 @@
     note($("letterNote"), "Сохраняю…");
     upsertTexts([["secret_letter_text", $("letterText").value], ["letter_hint", $("letterHint").value.trim()]])
       .then(function () { return codes.length ? api("rpc/set_letter_codes", { method: "POST", body: { codes: codes } }) : null; })
-      .then(function () { $("letterCodes").value = ""; note($("letterNote"), "Письмо сохранено.", "ok"); loadLetter(); })
+      .then(function (n) {
+        // раздел на сайте виден, только когда есть и текст, и хотя бы одно кодовое слово
+        var count = typeof n === "number" ? n : letterCodeCount;
+        var ready = !!$("letterText").value.trim() && count > 0;
+        return upsertTexts([["letter_enabled", ready ? "true" : "false"]]).then(function () { return ready; });
+      })
+      .then(function (ready) {
+        $("letterCodes").value = "";
+        note($("letterNote"), ready ? "Письмо сохранено и показано на сайте." : "Сохранено. Раздел появится на сайте, когда будут и текст, и кодовое слово.", "ok");
+        loadLetter();
+      })
       .catch(function (err) { note($("letterNote"), "Не получилось: " + err.message, "err"); });
   });
   loaders.letter = loadLetter;
