@@ -16,7 +16,6 @@
 | `og.jpg` | Картинка-превью для ссылок в мессенджерах |
 | `api/keepalive.js`, `vercel.json` | Ежедневный пинг, чтобы бесплатный Supabase не засыпал |
 | `supabase/migrations/` | Схема базы |
-| `supabase/functions/telegram/` | Уведомления о новых отзывах в Telegram |
 
 ## Базы
 

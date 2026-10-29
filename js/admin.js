@@ -72,11 +72,6 @@
       return fetch(C.url + "/storage/v1/object/media/" + path, { method: "DELETE", headers: headers() });
     });
   }
-  function fn(action) {
-    return ensureFresh().then(function () {
-      return fetch(C.url + "/functions/v1/telegram", { method: "POST", headers: headers({ "Content-Type": "application/json" }), body: JSON.stringify({ action: action }) });
-    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { d._status = r.status; return d; }); });
-  }
 
   // кнопка удаления с подтверждением вторым нажатием
   function dangerBtn(label, onConfirm) {
@@ -503,12 +498,11 @@
     return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
   }
   function loadSettings() {
-    api("site_texts?select=key,value&key=in.(auto_approve,wishes_reveal_at,contact_telegram,contact_instagram,contact_phone,telegram_chat_id)").then(function (rows) {
+    api("site_texts?select=key,value&key=in.(auto_approve,wishes_reveal_at,contact_telegram,contact_instagram,contact_phone)").then(function (rows) {
       var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
       $("setAuto").checked = m.auto_approve === "true";
       $("setReveal").value = toLocalInput(m.wishes_reveal_at || "2026-11-01T00:00:00+04:00");
       $("setTg").value = m.contact_telegram || ""; $("setIg").value = m.contact_instagram || ""; $("setPhone").value = m.contact_phone || "";
-      $("setChat").value = m.telegram_chat_id || "";
     });
   }
   $("setForm").addEventListener("submit", function (e) {
@@ -520,32 +514,6 @@
     note($("setNote"), "Сохраняю…");
     upsertTexts(pairs).then(function () { note($("setNote"), "Настройки сохранены.", "ok"); })
       .catch(function (err) { note($("setNote"), "Не получилось: " + err.message, "err"); });
-  });
-  $("tgSaveChat").addEventListener("click", function () {
-    var v = $("setChat").value.trim();
-    if (v && !/^-?\d{3,20}$/.test(v)) { note($("tgNote"), "Chat id состоит только из цифр (иногда с минусом в начале).", "err"); return; }
-    upsertTexts([["telegram_chat_id", v]]).then(function () { note($("tgNote"), "Chat id сохранён.", "ok"); })
-      .catch(function (err) { note($("tgNote"), "Не получилось: " + err.message, "err"); });
-  });
-  function tgMsg(d) {
-    if (d.error === "no_token") return "Бот ещё не подключён: добавьте секрет TELEGRAM_BOT_TOKEN в Supabase (шаг 2).";
-    if (d.error === "no_chat") return "Сначала сохраните chat id (шаг 4).";
-    if (d.error === "forbidden") return "Нет доступа. Войдите заново.";
-    if (d._status === 404) return "Функция уведомлений не найдена в этой базе.";
-    return d.description || d.error || "Что-то пошло не так.";
-  }
-  $("tgSetup").addEventListener("click", function () {
-    note($("tgNote"), "Подключаю…");
-    fn("setup").then(function (d) {
-      if (d.ok) note($("tgNote"), "Бот подключён" + (d.bot ? ": @" + d.bot : "") + ". Напишите ему /start.", "ok");
-      else note($("tgNote"), tgMsg(d), "err");
-    }).catch(function () { note($("tgNote"), "Не получилось связаться с функцией.", "err"); });
-  });
-  $("tgTest").addEventListener("click", function () {
-    note($("tgNote"), "Отправляю…");
-    fn("test").then(function (d) {
-      if (d.ok) note($("tgNote"), "Сообщение отправлено, проверьте Telegram.", "ok"); else note($("tgNote"), tgMsg(d), "err");
-    }).catch(function () { note($("tgNote"), "Не получилось связаться с функцией.", "err"); });
   });
   loaders.settings = loadSettings;
 

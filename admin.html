@@ -231,19 +231,6 @@ progress { width: 100%; accent-color: var(--pink); }
             <div class="row"><button class="btn" type="submit">Сохранить настройки</button><p class="note" id="setNote" role="status"></p></div>
           </form>
 
-          <div class="card stack">
-            <strong>Уведомления в Telegram</strong>
-            <ol class="steps">
-              <li>Создайте бота у <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> командой <code>/newbot</code> и скопируйте токен.</li>
-              <li>Откройте Supabase → проект → Edge Functions → Secrets и добавьте секрет <code>TELEGRAM_BOT_TOKEN</code> со значением токена. Токен никуда больше вставлять не нужно.</li>
-              <li>Нажмите «Подключить бота» ниже.</li>
-              <li>Напишите своему боту <code>/start</code>: он пришлёт chat id. Вставьте его в поле и сохраните.</li>
-              <li>Нажмите «Проверить»: бот пришлёт тестовое сообщение. Дальше о каждом новом отзыве будет приходить сообщение с кнопками «Показать», «Скрыть», «Удалить».</li>
-            </ol>
-            <div class="row"><label style="flex:1">Chat id <input type="text" id="setChat" inputmode="numeric" maxlength="40"></label></div>
-            <div class="row"><button class="btn" type="button" id="tgSaveChat">Сохранить chat id</button><button class="btn ghost" type="button" id="tgSetup">Подключить бота</button><button class="btn ghost" type="button" id="tgTest">Проверить</button></div>
-            <p class="note" id="tgNote" role="status"></p>
-          </div>
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 -- Обновление к 1 ноября: модерация, поздравления, лайки, антиспам, админка,
--- мысли, фото, голоса друзей, квиз, секретное письмо, уведомления в Telegram.
+-- мысли, фото, голоса друзей, квиз, секретное письмо.
 -- Совместимо со старой версией сайта: она по-прежнему читает и пишет отзывы.
 
 -- ---------- настройки и тексты ----------
@@ -311,30 +311,6 @@ begin
   return coalesce(array_length(string_to_array(joined, ','), 1), 0);
 end $$;
 
--- ---------- уведомления в Telegram ----------
-create extension if not exists pg_net with schema extensions;
-
-create or replace function public.notify_new_review() returns trigger
-language plpgsql security definer set search_path = ''
-as $$
-declare url text := public.setting('secret_functions_url');
-        tok text := public.setting('secret_hook_token');
-begin
-  if coalesce(url, '') = '' or coalesce(tok, '') = '' then return new; end if;
-  perform net.http_post(
-    url := url || '/telegram',
-    body := jsonb_build_object('type', 'new_review', 'id', new.id, 'name', new.name,
-                               'text', new.text, 'kind', new.kind, 'approved', new.approved),
-    headers := jsonb_build_object('Content-Type', 'application/json', 'x-hook-token', tok)
-  );
-  return new;
-exception when others then
-  return new;
-end $$;
-drop trigger if exists reviews_notify on public.reviews;
-create trigger reviews_notify after insert on public.reviews
-  for each row execute function public.notify_new_review();
-
 -- ---------- хранилище медиа ----------
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('media', 'media', true, 52428800, array[
@@ -357,7 +333,6 @@ revoke all on function public.setting(text) from public, anon, authenticated;
 revoke all on function public.wishes_reveal_at() from public;
 revoke all on function public.reviews_guard() from public, anon, authenticated;
 revoke all on function public.quiz_scores_guard() from public, anon, authenticated;
-revoke all on function public.notify_new_review() from public, anon, authenticated;
 revoke all on function public.touch_updated_at() from public, anon, authenticated;
 revoke all on function public.like_review(uuid, text) from public;
 revoke all on function public.like_counts() from public;
@@ -378,6 +353,5 @@ grant execute on function public.set_letter_codes(text[]) to authenticated;
 insert into public.site_texts (key, value) values
   ('auto_approve', 'false'),
   ('wishes_reveal_at', '2026-11-01T00:00:00+04:00'),
-  ('letter_hint', 'Подсказка: то, что знаем только мы двое'),
-  ('secret_hook_token', replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', ''))
+  ('letter_hint', 'Подсказка: то, что знаем только мы двое')
 on conflict (key) do nothing;
