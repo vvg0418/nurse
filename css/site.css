@@ -79,6 +79,8 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 .hero { height: 100vh; padding-bottom: 0; }
 .hero__content { height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 60rem 0; position: relative; z-index: 12; }
 .hero__main_text { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 680rem; line-height: .95; white-space: nowrap; }
+/* имя светлое, чтобы не сливаться с розовым крестом позади */
+.hero__main_text.ekran { color: #fff2f7; text-shadow: 0 0 60rem rgba(255, 61, 139, .45), 0 0 6rem rgba(255, 61, 139, .35); }
 .hero__content_bottom_text { grid-column: 1 / 2; margin: 0; }
 .hero__content_bottom_scroll { grid-column: 4 / 5; text-align: end; align-self: end; color: var(--grey); margin: 0; }
 
