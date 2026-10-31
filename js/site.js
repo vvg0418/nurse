@@ -116,8 +116,6 @@
     gsap.to(".zoj__photo_item:nth-child(2)", { y: "-150%", ease: "none",
       scrollTrigger: { trigger: ".zoj__photo_list", start: "top center", end: "bottom top", scrub: 1.5 } });
 
-    gsap.to(".gang__blood", { width: function () { return Math.min(rem(1100), window.innerWidth * .6); }, ease: "none", duration: .15,
-      scrollTrigger: { trigger: ".gang__141", start: "center 65%" } });
     qa(".gang__list_item").forEach(function (item) {
       gsap.fromTo(item, { opacity: 0 }, { opacity: 1, ease: "none",
         scrollTrigger: { trigger: item, start: "top 90%", end: "center center", scrub: true } });

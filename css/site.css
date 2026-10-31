@@ -140,7 +140,6 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
 /* круг */
 .gang { color: var(--black); padding-bottom: 600rem; }
 .gang__141 { position: relative; font-size: 520rem; line-height: 1; }
-.gang__blood { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 0; height: 360rem; overflow: hidden; background: var(--black); clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 88%); }
 .gang__text { margin: 80rem 0 300rem; }
 .gang__list_wrap { position: relative; display: flex; align-items: flex-start; }
 .gang__list { width: 100%; display: flex; flex-direction: column; gap: 60rem; }
@@ -442,7 +441,6 @@ section { padding-bottom: 200rem; overflow-x: clip; position: relative; }
   .zoj__photo_list { margin-top: 500rem; }
   .zoj__photo_item { width: 420rem; height: 520rem; padding: 26rem; }
   .gang__141 { font-size: 170rem; }
-  .gang__blood { height: 130rem; }
   .gang__text { margin: 50rem 0 140rem; }
   .gang__list_item { flex-direction: column; gap: 4rem; }
   .big_vid { height: 240vh; }
