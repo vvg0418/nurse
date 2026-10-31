@@ -301,7 +301,8 @@
       var text = cfg.text.value.trim();
       var name = cfg.name.value.trim().slice(0, 60) || "Гость";
       if (text.length < 5) { note("Напишите хотя бы пару слов.", true); return; }
-      if (cfg.hp.value || Date.now() - shownAt < 2500) {
+      // для поздравлений задержки нет: ловим только ботов через скрытое поле
+      if (cfg.hp.value || (cfg.kind !== "wish" && Date.now() - shownAt < 2500)) {
         cfg.text.value = ""; note(cfg.okPending()); return;
       }
       cfg.btn.disabled = true; note("Отправляю…");
