@@ -1,5 +1,5 @@
 // Живые разделы сайта: тексты из базы, день рождения, отзывы и поздравления,
-// лайки, письмо, квиз, мысли, галерея, голоса друзей, пасхалки.
+// лайки, письмо, квиз, галерея, голоса друзей, пасхалки.
 (function () {
   "use strict";
   var C = window.SITE_CONFIG;
@@ -532,21 +532,7 @@
     }).catch(function () {});
   }
 
-  // ---------- мысли, галерея, голоса ----------
-  function loadPosts() {
-    return api("posts?select=text,created_at&order=created_at.desc&limit=30").then(function (rows) {
-      var list = $("postsList"); list.textContent = "";
-      if (!rows || !rows.length) { show($("thoughts"), false); return; }
-      rows.forEach(function (p) {
-        var c = el("article", "post card");
-        c.appendChild(el("p", null, p.text));
-        var t = el("time", null, fmtDate(p.created_at)); t.dateTime = p.created_at;
-        c.appendChild(t);
-        list.appendChild(c);
-      });
-      show($("thoughts"), true); refresh();
-    }).catch(function () {});
-  }
+  // ---------- галерея, голоса ----------
   function loadGallery() {
     return api("gallery?select=path,caption&order=sort.asc,created_at.desc&limit=200").then(function (rows) {
       var grid = $("galleryGrid"); grid.textContent = "";
@@ -693,7 +679,6 @@
     show($("letter"), TEXTS.letter_enabled === "true");
     loadReviews();
     loadWishes();
-    loadPosts();
     loadGallery();
     loadVoices();
     api("quiz_questions?select=question,options,answer&order=sort.asc,created_at.asc&limit=50")

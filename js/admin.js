@@ -216,40 +216,6 @@
     }).catch(function () {});
   };
 
-  // ---------- мысли ----------
-  function loadPosts() {
-    var list = $("listPosts");
-    api("posts?select=id,text,published,created_at&order=created_at.desc").then(function (rows) {
-      list.textContent = "";
-      if (!rows || !rows.length) { list.appendChild(el("p", "empty", "Записей пока нет.")); return; }
-      rows.forEach(function (p) {
-        var it = el("div", "item");
-        var meta = el("div", "meta");
-        meta.appendChild(el("span", null, fmt(p.created_at)));
-        meta.appendChild(el("span", "pill " + (p.published ? "on" : "off"), p.published ? "на сайте" : "скрыта"));
-        it.appendChild(meta);
-        it.appendChild(el("p", null, p.text));
-        var row = el("div", "row");
-        row.appendChild(btn(p.published ? "Скрыть" : "Показать", "quiet", function () {
-          api("posts?id=eq." + p.id, { method: "PATCH", prefer: "return=minimal", body: { published: !p.published } }).then(loadPosts);
-        }));
-        row.appendChild(dangerBtn("Удалить", function () { api("posts?id=eq." + p.id, { method: "DELETE" }).then(loadPosts); }));
-        it.appendChild(row);
-        list.appendChild(it);
-      });
-    });
-  }
-  $("postForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var t = $("postText").value.trim();
-    if (!t) { note($("postNote"), "Напишите текст записи.", "err"); return; }
-    note($("postNote"), "Публикую…");
-    api("posts", { method: "POST", prefer: "return=minimal", body: { text: t } })
-      .then(function () { $("postText").value = ""; note($("postNote"), "Запись на сайте.", "ok"); loadPosts(); })
-      .catch(function (err) { note($("postNote"), "Не получилось: " + err.message, "err"); });
-  });
-  loaders.posts = loadPosts;
-
   // ---------- фото ----------
   function shrink(file) {
     return new Promise(function (resolve) {

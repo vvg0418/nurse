@@ -114,7 +114,6 @@ progress { width: 100%; accent-color: var(--pink); }
       <nav class="tabs" role="tablist" id="tabs">
         <button class="tab" role="tab" data-tab="reviews">Отзывы <span class="badge" id="badgeReviews" hidden></span></button>
         <button class="tab" role="tab" data-tab="wishes">Поздравления <span class="badge" id="badgeWishes" hidden></span></button>
-        <button class="tab" role="tab" data-tab="posts">Мысли</button>
         <button class="tab" role="tab" data-tab="photos">Фото</button>
         <button class="tab" role="tab" data-tab="voices">Голоса</button>
         <button class="tab" role="tab" data-tab="quiz">Квиз</button>
@@ -141,16 +140,6 @@ progress { width: 100%; accent-color: var(--pink); }
         <div class="list" id="listWish"></div>
       </section>
 
-      <!-- мысли -->
-      <section data-panel="posts" hidden>
-        <h2>Мысли</h2>
-        <p class="lead">Короткие записи, которые появятся на сайте отдельным разделом. Пока записей нет, раздела на сайте не видно.</p>
-        <form class="card stack" id="postForm" novalidate>
-          <label>Новая запись <textarea id="postText" maxlength="4000" placeholder="О чём думается сегодня"></textarea></label>
-          <div class="row"><button class="btn" type="submit">Опубликовать</button><p class="note" id="postNote" role="status"></p></div>
-        </form>
-        <div class="list" id="listPosts" style="margin-top:16px"></div>
-      </section>
 
       <!-- фото -->
       <section data-panel="photos" hidden>
