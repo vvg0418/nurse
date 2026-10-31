@@ -510,9 +510,10 @@
     return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
   }
   function loadSettings() {
-    api("site_texts?select=key,value&key=in.(auto_approve,wishes_reveal_at,contact_telegram,contact_instagram,contact_phone)").then(function (rows) {
+    api("site_texts?select=key,value&key=in.(auto_approve,gate_enabled,wishes_reveal_at,contact_telegram,contact_instagram,contact_phone)").then(function (rows) {
       var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
       $("setAuto").checked = m.auto_approve === "true";
+      $("setGate").checked = m.gate_enabled !== "false";
       $("setReveal").value = toLocalInput(m.wishes_reveal_at || "2026-11-01T00:00:00+04:00");
       $("setTg").value = m.contact_telegram || ""; $("setIg").value = m.contact_instagram || ""; $("setPhone").value = m.contact_phone || "";
     });
@@ -520,7 +521,7 @@
   $("setForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var rv = $("setReveal").value ? new Date($("setReveal").value) : null;
-    var pairs = [["auto_approve", $("setAuto").checked ? "true" : "false"],
+    var pairs = [["auto_approve", $("setAuto").checked ? "true" : "false"], ["gate_enabled", $("setGate").checked ? "true" : "false"],
       ["contact_telegram", $("setTg").value.trim()], ["contact_instagram", $("setIg").value.trim()], ["contact_phone", $("setPhone").value.trim()]];
     if (rv && !isNaN(rv)) pairs.push(["wishes_reveal_at", rv.toISOString()]);
     note($("setNote"), "Сохраняю…");

@@ -72,6 +72,7 @@
         var lenis = new Lenis({ autoRaf: true, duration: 1.8, smoothWheel: true });
         lenis.on("scroll", ScrollTrigger.update);
         window.SiteFx.lenis = lenis;
+        if (window.Gate && window.Gate.locked) lenis.stop();
       } catch (e) {}
     }
 

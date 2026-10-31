@@ -676,6 +676,9 @@
     okPublished: function () { return "Спасибо! Ваш отзыв опубликован."; },
     okPending: function () { return "Спасибо! Отзыв появится на сайте после проверки."; },
     after: loadReviews });
+  if ($("gform")) setupForm({ form: $("gform"), name: $("gname"), text: $("gtext"), hp: $("gweb"), btn: $("gsend"), note: $("gnote"), kind: "wish",
+    okPublished: function () { return "Спасибо! Алина увидит его " + revealLabel() + "."; },
+    okPending: function () { return "Спасибо! Алина увидит его " + revealLabel() + "."; } });
   setupForm({ form: $("wform"), name: $("wname"), text: $("wtext"), hp: $("wweb"), btn: $("wsend"), note: $("wnote"), kind: "wish",
     okPublished: function () { return Date.now() >= revealAt() ? "Спасибо! Поздравление уже на стене." : "Спасибо! Алина увидит его " + revealLabel() + "."; },
     okPending: function () { return Date.now() >= revealAt() ? "Спасибо! Поздравление появится после проверки." : "Спасибо! Алина увидит его " + revealLabel() + "."; },

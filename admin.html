@@ -109,7 +109,7 @@ progress { width: 100%; accent-color: var(--pink); }
     <header>
       <div class="top">
         <div class="row"><div class="brand">alina <small>админка</small></div><span class="env" id="envBadge"></span></div>
-        <div class="row"><a href="./" target="_blank" rel="noopener">Открыть сайт</a><span class="note" id="whoami"></span><button class="btn quiet" type="button" id="logout">Выйти</button></div>
+        <div class="row"><a href="./#preview" target="_blank" rel="noopener">Открыть сайт</a><span class="note" id="whoami"></span><button class="btn quiet" type="button" id="logout">Выйти</button></div>
       </div>
       <nav class="tabs" role="tablist" id="tabs">
         <button class="tab" role="tab" data-tab="reviews">Отзывы <span class="badge" id="badgeReviews" hidden></span></button>
@@ -221,6 +221,7 @@ progress { width: 100%; accent-color: var(--pink); }
         <h2>Настройки</h2>
         <div class="stack">
           <form class="card stack" id="setForm" novalidate>
+            <label class="switch"><input type="checkbox" id="setGate"> Закрывать сайт заставкой с отсчётом, пока стена поздравлений не открылась</label>
             <label class="switch"><input type="checkbox" id="setAuto"> Показывать новые отзывы и поздравления сразу, без проверки</label>
             <label>Когда открыть стену поздравлений <input type="datetime-local" id="setReveal"></label>
             <p class="note">До этого момента гости видят только счётчик поздравлений. Время указывается по часам вашего устройства.</p>
